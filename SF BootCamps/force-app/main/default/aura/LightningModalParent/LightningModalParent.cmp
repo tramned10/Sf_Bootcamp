@@ -1,0 +1,5 @@
+<aura:component >
+	<lightning:button variant="brand" label="Open Modal" title="Open Modal" onclick="{! c.openModal }" />
+	<!-- child component having modal -->
+	<c:LightningModalChild aura:id="showModal" />
+</aura:component>

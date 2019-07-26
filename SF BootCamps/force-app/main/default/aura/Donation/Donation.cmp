@@ -1,0 +1,47 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="Global" controller="DonationController" >
+ <!--<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>-->
+    
+    <aura:attribute name="donation" type="Donation__c[]"/>
+   
+    <aura:attribute  name="newDonate" type="Donation__c"
+                    default="{ 'sobjectType': 'Donation__c' }"/>	
+    
+    <div aria-labelledby="newDonateItem">
+        
+   	<fieldset class="slds-box slds-theme--default slds-container--small">
+
+        <!-- CREATE NEW DONATE FORM -->
+        <form class="slds-form--stacked">          
+            <lightning:input aura:id="donateForm" 
+                             label="Donar Name"
+                             name="DonarName"
+                             value="{!v.newDonate.Donar_Name__c}"/> 
+            <lightning:input type="number" 
+                             aura:id="donateForm" 
+                             label="Amount"
+                             name="DonateAmount"
+                             min="0.1"
+                             formatter="currency"
+                             step="0.01"
+                             value="{!v.newDonate.Amount__c}"
+                             messageWhenRangeUnderflow="Enter an amount that's at least $0.10."/>
+            <lightning:input type="date" 
+                             aura:id="donateForm" 
+                             label="Donation Date"
+                             name="Donatedate"
+                             value="{!v.newDonate.Donation_Date__c}"/>
+            
+            <lightning:input aura:id="donateForm" 
+                             label="Note"  
+                             name="DonateNote"
+                             value="{!v.newDonate.Note2__c}"/>
+			<!-- Button-->            
+            <lightning:button aura:id="button"
+                              label="Save Donation" 
+                              class="slds-m-top--medium"
+                              variant="brand"
+                              onclick="{!c.clickSave}"/>
+       </form>
+     </fieldset>         
+    </div>
+</aura:component>

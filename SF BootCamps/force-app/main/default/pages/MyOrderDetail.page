@@ -1,0 +1,111 @@
+<apex:page standardController="Order" extensions="MyOrderDetailCls" >
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+    <apex:form >
+        <head>
+         <apex:slds />
+        
+         <script>
+            function showModal(modalId) {
+                var modal = document.getElementById(modalId);
+                modal.style.display = "block";
+            }
+        </script>
+    </head>
+        
+       <apex:outputPanel layout="block" id="outputId">
+       <table border="0" width = "100%" Column = "2">
+           <br/>
+           <div>
+               Order Details
+           </div>
+           <br/>
+           
+           <tr>
+           <th>Order Number: </th>
+           <th>Account Name: </th>
+           <th>Amount:</th>   
+           <th>Status: </th>
+           </tr>
+        <tr>
+            <td>{!orderRecord.OrderNumber}</td>
+            <td>{!orderRecord.Account.Name}</td>
+            <td>{!orderRecord.TotalAmount}</td>
+            <td>{!orderRecord.Status}</td>
+        </tr>
+            </table>
+       </apex:outputPanel>
+    <apex:outputPanel layout="block" id="outputId2">
+       <table border="0" width = "100%" Column = "2">
+           <br/>
+           <div>
+               Order Products
+           </div>
+           <br/>
+           <tr>
+            <th>Product Name</th>
+            <th>Unit Price </th>
+           </tr>
+           
+           <apex:repeat value="{!prodList}"  var="prd">
+        <tr>
+           
+            <td>{!prd.Product2.Name}</td>
+            <td>{!prd.UnitPrice}</td>
+            <td><a href ="#" onclick = "productDetailsJS('{!prd.Product2.id}');" >View Details</a></td>
+            </tr>
+ 	 </apex:repeat>  
+     </table>
+       </apex:outputPanel>
+        
+         <apex:actionFunction name="productDetailsJS" action="{!showDetails}" oncomplete="showModal('productsModal');" reRender="modalRender">
+        	<apex:param name="productId" value="" assignTo="{!thisId}"/>
+        </apex:actionFunction> 
+        
+                 <div style="height:640px display: none; display:{!if(showPopUp,"block","none")};" id = "productsModal" >
+                <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1">
+            <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+                  <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                  </svg>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Product Details</h2>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+              <apex:outputPanel id="modalRender">   
+          		 <apex:repeat value="{!getProd}"  var="gtProd">
+                    
+       			 <tr> 
+                 <th>Product Name</th>
+                 <p>
+           		 <td>{!gtProd.Name}</td> 
+                  </p>    
+                 </tr>
+                 <p>
+                    
+                    <tr>  
+                  <th>Product Description</th>
+                        <td><apex:InputField value="{!gtProd.Description}"/></td>
+              	 </tr>
+                      </p>
+                  </apex:repeat>
+                  </apex:outputPanel> 
+                </div>
+              <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral">Cancel</button>
+                 <apex:commandButton action="{!updateDescription}" id="thisButton"  />
+                <!--<button class="slds-button slds-button_brand">Save</button>-->
+              </footer>
+            </div>
+          </section>
+          <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+
+ 
+    </apex:form>
+    </html>
+        
+</apex:page>

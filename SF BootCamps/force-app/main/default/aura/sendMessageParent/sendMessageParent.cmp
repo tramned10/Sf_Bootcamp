@@ -1,0 +1,9 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="Global" >
+    
+    <aura:handler event="c:sendMessageEvent" action="{!c.handleSend}" />
+    
+    <!-- <aura:handler name="send" event="c:sendMessageEvent" action="{!c.handleSend}" />
+    
+    <c:sendMEssage send="{!c.handleSend}" />-->
+    <c:sendMessage />
+</aura:component>

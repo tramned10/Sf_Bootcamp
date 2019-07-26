@@ -1,0 +1,48 @@
+<apex:page controller="MyOrderCLS" tabStyle="Account"  >
+    
+    <apex:form >
+    	<apex:pageBLock >
+            
+        	<apex:pageBlockSection >
+                <!--section for button and input text-->
+            	<apex:inputText value="{!Skey}"/>
+                <apex:commandButton value="Search List" action="{!Search}" rerender="Opanel"/>
+            </apex:pageBlockSection>
+        </apex:pageBLock>
+   
+    <apex:pageBlock rendered="true">
+     <apex:outputPanel id="Opanel">
+    <table style="width:100%"> 
+          <tr>
+              <th>Order Number</th>
+              <th>Account Name</th>
+              <th>Status</th>
+              <th>Create Date</th>
+          
+          </tr>
+      <apex:repeat value="{!OrderList}" var="oR" >
+        
+         <tr>
+           <td><apex:outputlink value="/apex/MyOrderDetail?id={!oR.id}">{!oR.OrderNumber}</apex:outputlink></td>
+          <td>{!oR.AccountId} </td>
+          <td>{!oR.Status} </td>
+          <td>{!oR.CreatedDate}</td>
+         </tr>
+      </apex:repeat>
+    </table>
+         </apex:outputPanel>
+       
+    </apex:pageBlock>
+    
+    
+    <!-- Pagination -->
+     
+ 		<apex:commandLink action="{!first}" rerender="Opanel">First</apex:commandLink>  &nbsp;
+ 		<apex:commandLink action="{!previous}"  rerender="Opanel">Previous</apex:commandLink>  &nbsp;
+        <apex:commandLink action="{!next}"  rerender="Opanel">Next</apex:commandlink>   &nbsp;
+   		<apex:commandLink action="{!last}" rerender="Opanel">Last</apex:commandlink>
+   	<!--<p><apex:outputText value="Page {!pageNumber} " /><span>of</span><apex:outputText value=" {!totalPages}" /></p>-->
+        
+
+</apex:form>
+</apex:page>

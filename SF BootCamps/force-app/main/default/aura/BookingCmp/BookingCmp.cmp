@@ -1,0 +1,65 @@
+<aura:component access="global" controller="BookingFlightController" >
+    
+    
+    <!--Attribute use for event-->
+  	<aura:attribute name="messageFromEvent" type="String"/>
+    
+    <!--Use for modal-->
+     <aura:attribute name="strRecordId" type="String" />
+    <lightning:overlayLibrary aura:id="overlayLibDemo1"/>
+     <!--<lightning:notificationsLibrary aura:id="notifLib"/>-->
+    <!-- attirbute for picklist-->
+   <aura:attribute name="PackageMap" type="Map"/>
+    
+   <aura:attribute  name="Pack" type="Flight__c"
+                    default="{ 'sobjectType': 'Flight__c',
+                             'Packages__c': ''}"/>
+    <aura:attribute name="recordId" type="String" />     
+    <!-- handler for picklist-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+   
+            <lightning:input aura:id="" 
+                             label="First Name"
+                             name=""
+                             value=""/> 
+           <lightning:input aura:id="" 
+                             label="First Name"
+                             name=""
+                             value=""/>
+            <lightning:input type="Email" 
+                             aura:id="" 
+                             label="Email"
+                             name=""
+                             value=""/>
+            
+            <lightning:input aura:id="" 
+                             label="Note"  
+                             name=""
+                             value=""/>
+        
+         <lightning:select aura:id="packPicklist" 
+                           value="{!v.Pack.Packages__c}" 
+                           onchange="{!c.handleChange}" 
+                           name="PackageList" 
+                           label="Packages" 
+                           required="true">
+                    <option value="">--None--</option>
+                    <aura:iteration items="{!v.PackageMap}" 
+                                    var="pck" 
+                                    indexVar="key">
+                        <option text="{!pck.value}" 
+                                value="{!pck.key}" 
+                                selected="{!pck.key==v.Pack.Packages__c}" />
+                    </aura:iteration>
+                </lightning:select>
+                    
+          <!-- Create booking-->
+					<footer class="slds-modal__footer">
+				        <lightning:button variant="brand" label="Save" title="Save" onclick="{! c.handleSave }" />
+				        <lightning:button variant="brand" label="Cancel" title="Cancel" onclick="{! c.closeModal }" />   
+				    </footer>
+       			
+  	
+   
+</aura:component>

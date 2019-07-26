@@ -1,0 +1,62 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="Global" controller="BookingFlightController" >
+	<!--Attribute for picklist-->
+    <aura:attribute name="controllerOpt" type="List"/>
+    <aura:attribute name="dependentPicklist" type="Object"/>
+    <aura:attribute name="dependentOpt" type="List"/>
+    <aura:attribute name="disabledPick" type="Boolean" default="true"/>
+   
+    <!--for search-->
+    <aura:attribute name="desti" type="string" />
+    <aura:attribute name="orig" type="string" />
+    <aura:attribute name="livDate" type="Date" />
+     
+    
+    <!--Event Handler search-->
+    
+    <aura:registerEvent name="flightDetails" type="c:searchFlight"/>
+    <!--handler for pick list-->
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <div aria-labelledby="">
+                 
+        <!--Picklist-->
+            <lightning:select name="controlPL" label="Flying From" 
+                              aura:id="controlPL" 
+                              onchange="{!c.PickChange}"
+                              value="{!v.orig}">
+                <option value="None">None</option>
+                <aura:iteration items="{!v.controllerOpt}" var="p">
+                    <option value="{!p.value}">{!p.text}</option>
+                </aura:iteration>
+            </lightning:select>
+             
+            <lightning:select name="dependentPicklist" 
+                              label="Flying to"
+                              aura:id="dependentPL"
+                              disabled="{!v.disabledPick}"
+                              value="{!v.desti}">
+                <option value="none">None</option>
+                <aura:iteration items="{!v.dependentOpt}" var="d">
+                    <option value="{!d.value}">{!d.text}</option>
+                </aura:iteration>
+            </lightning:select>
+        
+        <!--imput date-->
+        	<lightning:input type="date" 
+                             format ="YYYY/MM/DD"
+                             aura:id="dates"
+                             label="Departure Date"
+                             name="departDate"
+                             value="{!v.livDate}"/>
+            
+			<!-- search  flight event-->            
+            <lightning:button variant="brand" 
+                              label="Search Flight" 
+                              title="searchFlights" 
+                              aura:id = "searchDate"
+                              onclick="{!c.searchFlyt}" />
+      
+              
+    </div>
+
+</aura:component>
