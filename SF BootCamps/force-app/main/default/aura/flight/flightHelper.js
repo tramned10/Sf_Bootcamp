@@ -1,7 +1,0 @@
-({
-	helper : function(component, event) {
-        
-      
-    },
-   
-})

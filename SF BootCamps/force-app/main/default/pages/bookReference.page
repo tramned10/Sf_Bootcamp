@@ -1,5 +1,0 @@
-<apex:page standardController="Booking__c" renderAs="pdf">
-    <apex:outputField value="{!Booking__c.Name}"/>
-    <apex:outputField value="{!Booking__c.Contact__r.Name}"/>
-    <apex:outputField value="{!Booking__c.Flights__r.Name}"/>
-</apex:page>

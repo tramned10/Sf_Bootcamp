@@ -1,5 +1,0 @@
-({
-    save : function(component,donateItem) {
-		
-    }
-})

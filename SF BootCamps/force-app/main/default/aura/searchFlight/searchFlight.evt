@@ -1,6 +1,0 @@
-<aura:event type="APPLICATION" description="Event template">
-  	<aura:attribute name="livDate" type="Date" />
-    <aura:attribute name="origin" type="String" />
-    <aura:attribute name="destination" type="String" />
-    
-</aura:event>

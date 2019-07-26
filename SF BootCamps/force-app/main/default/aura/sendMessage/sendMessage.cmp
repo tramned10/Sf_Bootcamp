@@ -1,7 +1,0 @@
-<aura:component >
-    
-    <aura:registerEvent name="send" type="c:sendMessageEvent" />
-    
-    <button onclick ="{!c.sendMessage}">Send</button>
-	
-</aura:component>

@@ -1,5 +1,0 @@
-<aura:event type="APPLICATION" description="Event template" >
-    <!-- event thrown to parent-->
-    <aura:attribute name="message" type="String" />
-    
-</aura:event>
